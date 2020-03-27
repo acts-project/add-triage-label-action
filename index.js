@@ -36,23 +36,25 @@ async function run() {
   if(github.context.payload.issue !== undefined) {
     console.log("This is an issue");
 
+    const issue = context.payload.issue;
+
     // const issue = octokit.issues.get({
     // owner,
     // repo,
     // context.issue.number
     // });
     var labels = [];
-    for(const lab in context.issue.payload.labels) {
+    for(const lab in issue.labels) {
       labels.push(lab.name);
     }
-    console.log(`Issue #${context.issue.number} has labels: ${labels}`);
+    console.log(`Issue #$issue.number} has labels: ${labels}`);
 
     if(!hasValidLabel(labels, validLabels)) {
       console.log("Does not have valid label -> add triage label");
       await octokit.issues.addLabels({
         owner,
         repo,
-        issue_number: context.issue.number,
+        issue_number: issue.number,
         labels: [triage]
       });
     }
