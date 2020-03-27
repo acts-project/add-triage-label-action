@@ -45,6 +45,7 @@ async function run() {
     // });
     var labels = [];
     for(const lab in issue.labels) {
+      console.log(lab);
       labels.push(lab.name);
     }
     console.log(issue);
