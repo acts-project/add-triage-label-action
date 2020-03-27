@@ -32,8 +32,6 @@ async function run() {
   console.log(`Action is ${action}`);
 
 
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
 
   if(github.context.payload.issue !== undefined) {
     console.log("This is an issue");
@@ -44,10 +42,10 @@ async function run() {
     // context.issue.number
     // });
     var labels = [];
-    for(const lab in context.issue.label) {
+    for(const lab in context.issue.labels) {
       labels.push(lab.name);
     }
-    console.log(`Issue #${context.issue.umber} has labels: ${labels}`);
+    console.log(`Issue #${context.issue.number} has labels: ${labels}`);
 
     if(!hasValidLabel(labels, validLabels)) {
       console.log("Does not have valid label -> add triage label");
@@ -88,3 +86,6 @@ function handleError(err) {
 }
 
 run().catch(handleError)
+
+const payload = JSON.stringify(github.context.payload, undefined, 2)
+console.log(`The event payload: ${payload}`);
