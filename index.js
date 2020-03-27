@@ -43,7 +43,10 @@ async function run() {
     // repo,
     // context.issue.number
     // });
-    const labels = context.issue.label;
+    var labels = [];
+    for(const lab in context.issue.label) {
+      labels.push(lab.name);
+    }
     console.log(`Issue #${context.issue.umber} has labels: ${labels}`);
 
     if(!hasValidLabel(labels, validLabels)) {
