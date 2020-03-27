@@ -8,6 +8,10 @@ inputs:
     description: Which label to set in absence of another label
     required: true
     default: Triage
+  github-token:
+    description: The GitHub token
+    default: ${{ github.token  }}
+    required: false
 runs:
   using: 'node12'
   main: 'index.js'
