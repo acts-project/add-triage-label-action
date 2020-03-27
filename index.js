@@ -48,7 +48,7 @@ try {
 
     if(!hasValidLabel(labels, validLabels)) {
       console.log("Does not have valid label -> add triage label");
-      octokit.issues.addLabels({
+      await octokit.issues.addLabels({
         owner,
         repo,
         issue_number: context.issue.number,
