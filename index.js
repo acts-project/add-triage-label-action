@@ -68,7 +68,37 @@ async function run() {
 
   }
   else if(github.context.payload.pull_request !== undefined) {
-    console.log("This is an issue");
+    console.log(issue"This is a pull request ");
+
+    const pr = context.payload.pull_request;
+
+    var labels = [];
+    for(const lab of pr.labels) {
+      labels.push(lab.name);
+    }
+    console.log(`PR #${pr.number} has labels: ${labels}`);
+
+    if(!hasValidLabel(labels, validLabels)) {
+      console.log("Does not have valid label -> add triage label");
+      await octokit.issues.addLabels({
+        owner,
+        repo,
+        issue_number: pr.number,
+        labels: [triage]
+      });
+    }
+    else {
+      console.log("Has valid label, make sure triage label is not among them");
+      const index = labels.indexOf(triage);
+      if(index > -1) {
+        await octokit.issues.deleteLabel({
+          owner,
+          repo,
+          issue_number: pr.number,
+          name: triage
+        });
+      }
+    }
 
 
   }
