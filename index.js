@@ -4,7 +4,7 @@ const github = require('@actions/github');
 function hasValidLabel(labels, validLabels) {
   let ok = false;
 
-  for(const label in labels) {
+  for(const label of labels) {
     if(validLabels.indexOf(label) !== -1) {
       ok = true;
     }
@@ -38,16 +38,10 @@ async function run() {
 
     const issue = context.payload.issue;
 
-    // const issue = octokit.issues.get({
-    // owner,
-    // repo,
-    // context.issue.number
-    // });
     var labels = [];
     for(const lab of issue.labels) {
       labels.push(lab.name);
     }
-    console.log(issue);
     console.log(`Issue #${issue.number} has labels: ${labels}`);
 
     if(!hasValidLabel(labels, validLabels)) {
