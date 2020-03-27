@@ -42,7 +42,7 @@ async function run() {
     // context.issue.number
     // });
     var labels = [];
-    for(const lab in context.issue.labels) {
+    for(const lab in context.issue.payload.labels) {
       labels.push(lab.name);
     }
     console.log(`Issue #${context.issue.number} has labels: ${labels}`);
