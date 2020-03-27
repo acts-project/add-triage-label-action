@@ -54,15 +54,14 @@ async function run() {
       });
     }
     else {
-      console.log("Has valid label, make sue triage label is not among them");
+      console.log("Has valid label, make sure triage label is not among them");
       const index = labels.indexOf(triage);
-      if(index !== -1) {
-        labels.splice(index, 1);
-        await octokit.issues.addLabels({
+      if(index > -1) {
+        await octokit.issues.deleteLabel({
           owner,
           repo,
           issue_number: issue.number,
-          labels: labels
+          name: triage
         });
       }
     }
