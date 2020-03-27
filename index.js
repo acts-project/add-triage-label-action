@@ -47,7 +47,8 @@ async function run() {
     for(const lab in issue.labels) {
       labels.push(lab.name);
     }
-    console.log(`Issue #$issue.number} has labels: ${labels}`);
+    console.log(issue);
+    console.log(`Issue #${issue.number} has labels: ${labels}`);
 
     if(!hasValidLabel(labels, validLabels)) {
       console.log("Does not have valid label -> add triage label");
