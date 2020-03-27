@@ -1,13 +1,13 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: Check labels 
+description: Check if one of the required labels is set
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  labels:
+    description: Which labels are elibile
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we we greeted you'
+  triage_label:
+    description: Which label to set in absence of another label
+    required: true
+    default: Triage
 runs:
   using: 'node12'
   main: 'index.js'
