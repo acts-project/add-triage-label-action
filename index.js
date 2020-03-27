@@ -44,8 +44,7 @@ async function run() {
     // context.issue.number
     // });
     var labels = [];
-    for(const lab in issue.labels) {
-      console.log(lab);
+    for(const lab of issue.labels) {
       labels.push(lab.name);
     }
     console.log(issue);
