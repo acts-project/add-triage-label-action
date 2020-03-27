@@ -52,7 +52,7 @@ async function run() {
         owner,
         repo,
         issue_number: context.issue.number,
-        labels: `${triage}`
+        labels: [triage]
       });
     }
     else {
