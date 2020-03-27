@@ -13,7 +13,7 @@ function hasValidLabel(labels, validLabels) {
   return ok;
 }
 
-try {
+async function run() {
   const token = core.getInput('github-token');
   const octokit = new github.GitHub(token);
 
@@ -39,9 +39,9 @@ try {
     console.log("This is an issue");
 
     // const issue = octokit.issues.get({
-      // owner,
-      // repo,
-      // context.issue.number
+    // owner,
+    // repo,
+    // context.issue.number
     // });
     const labels = context.issue.label;
     console.log(`Issue #${context.issue.umber} has labels: ${labels}`);
@@ -63,16 +63,25 @@ try {
   else if(github.context.payload.pull_request !== undefined) {
     console.log("This is an issue");
 
-    
+
   }
   else {
     core.setFailed("Invalid event combination");
   }
-  
 
-
-
-
-} catch (error) {
-  core.setFailed(error.message);
 }
+
+function handleError(err) {
+    console.error(err)
+
+  if (err && err.message) {
+        core.setFailed(err.message)
+      
+  } else {
+        core.setFailed(`Unhandled error: ${err}`)
+      
+  }
+  
+}
+
+run().catch(handleError)
