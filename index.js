@@ -68,7 +68,7 @@ async function run() {
 
   }
   else if(github.context.payload.pull_request !== undefined) {
-    console.log(issue"This is a pull request ");
+    console.log("This is a pull request ");
 
     const pr = context.payload.pull_request;
 
